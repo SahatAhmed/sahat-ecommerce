@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: ecommerce-php
+    env: docker
+    branch: main
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: DB_HOST
+        fromDatabase:
+          name: ecommerce-db
+          property: host
+      - key: DB_NAME
+        fromDatabase:
+          name: ecommerce-db
+          property: name
+      - key: DB_USER
+        fromDatabase:
+          name: ecommerce-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: ecommerce-db
+          property: password
+
+databases:
+  - name: ecommerce-db
+    engine: mysql
+    plan: free
+    region: oregon
